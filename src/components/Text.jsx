@@ -27,6 +27,12 @@ const styles = StyleSheet.create({
   appBarText: {
     color: theme.colors.appBarText,
   },
+  repositoryItemLanguageText: {
+    color: theme.colors.repositoryItemLanguageText
+  },
+  repositoryItemTextSecondary: {
+    color: theme.colors.repositoryItemTextSecondary
+  }
 })
 
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
@@ -35,6 +41,8 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     color === 'textSecondary' && styles.colorTextSecondary,
     color === 'primary' && styles.colorPrimary,
     color === 'appBarText' && styles.appBarText,
+    color === 'repositoryItemLanguageText' && styles.repositoryItemLanguageText,
+    color === 'repositoryItemTextSecondary' && styles.repositoryItemTextSecondary,
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontSize === 'heading' && styles.fontSizeHeading,
     fontWeight === 'bold' && styles.fontWeightBold,
