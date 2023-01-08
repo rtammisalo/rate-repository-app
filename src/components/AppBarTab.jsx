@@ -6,7 +6,7 @@ const AppBarTab = ({ style, linkTo, content }) => {
   return (
     <Pressable style={style}>
       <Link to={linkTo}>
-        <Heading color={'appBarText'} fontWeight={'bold'}>
+        <Heading color={'textTertiary'} fontWeight={'bold'}>
           {content}
         </Heading>
       </Link>

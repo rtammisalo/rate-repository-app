@@ -2,14 +2,11 @@ const theme = {
   colors: {
     textPrimary: '#24292e',
     textSecondary: '#586069',
+    textTertiary: 'white',
     primary: '#0366d6',
-    appBarText: 'white',
     appBarBackground: '#24292e',
-    repositoryItemLanguageBackground: '#0366d6',
-    repositoryItemLanguageText: 'white',
-    repositoryItemTextSecondary: 'grey',
-    repositoryItemBackground: 'white',
     mainBackground: '#e1e4e8',
+    viewBackground: 'white',
   },
   fontSizes: {
     body: 14,

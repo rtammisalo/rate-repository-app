@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
   colorTextSecondary: {
     color: theme.colors.textSecondary,
   },
+  colorTextTertiary: {
+    color: theme.colors.textTertiary,
+  },
   colorPrimary: {
     color: theme.colors.primary,
   },
@@ -24,25 +27,14 @@ const styles = StyleSheet.create({
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,
   },
-  appBarText: {
-    color: theme.colors.appBarText,
-  },
-  repositoryItemLanguageText: {
-    color: theme.colors.repositoryItemLanguageText
-  },
-  repositoryItemTextSecondary: {
-    color: theme.colors.repositoryItemTextSecondary
-  }
 })
 
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
   const textStyle = [
     styles.text,
     color === 'textSecondary' && styles.colorTextSecondary,
+    color === 'textTertiary' && styles.colorTextTertiary,
     color === 'primary' && styles.colorPrimary,
-    color === 'appBarText' && styles.appBarText,
-    color === 'repositoryItemLanguageText' && styles.repositoryItemLanguageText,
-    color === 'repositoryItemTextSecondary' && styles.repositoryItemTextSecondary,
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontSize === 'heading' && styles.fontSizeHeading,
     fontWeight === 'bold' && styles.fontWeightBold,

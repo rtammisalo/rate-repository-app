@@ -24,7 +24,7 @@ const ItemDetailsStyle = StyleSheet.create({
     marginTop: 8,
   },
   language: {
-    backgroundColor: theme.colors.repositoryItemLanguageBackground,
+    backgroundColor: theme.colors.primary,
     borderRadius: 5,
     flexGrow: 0,
     alignSelf: 'flex-start',
@@ -43,10 +43,7 @@ const RepositoryItemDetails = ({ item }) => {
       </View>
       <View style={ItemDetailsStyle.detailsContainer}>
         <Text fontWeight={'bold'}>{item.fullName}</Text>
-        <Text
-          style={ItemDetailsStyle.detailsChild}
-          color={'repositoryItemTextSecondary'}
-        >
+        <Text style={ItemDetailsStyle.detailsChild} color={'textSecondary'}>
           {item.description}
         </Text>
         <Text
@@ -54,7 +51,7 @@ const RepositoryItemDetails = ({ item }) => {
             ...ItemDetailsStyle.detailsChild,
             ...ItemDetailsStyle.language,
           }}
-          color="repositoryItemLanguageText"
+          color="textTertiary"
         >
           {item.language}
         </Text>
@@ -88,7 +85,7 @@ const MetaDataView = ({ count, label }) => {
   return (
     <View style={ItemMetaDataStyle.metaDataContent}>
       <Text fontWeight={'bold'}>{textifyCount(count)}</Text>
-      <Text color={'repositoryItemTextSecondary'}>{label}</Text>
+      <Text color={'textSecondary'}>{label}</Text>
     </View>
   )
 }
@@ -108,7 +105,7 @@ const RepositoryItemStyle = StyleSheet.create({
   container: {
     padding: 15,
     alignItems: 'stretch',
-    backgroundColor: theme.colors.repositoryItemBackground,
+    backgroundColor: theme.colors.viewBackground,
   },
 })
 
