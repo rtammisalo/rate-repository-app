@@ -1,12 +1,15 @@
 import { Pressable } from 'react-native'
+import { Link } from 'react-router-native'
 import { Heading } from './Text'
 
-const AppBarTab = ({ content }) => {
+const AppBarTab = ({ style, linkTo, content }) => {
   return (
-    <Pressable>
-      <Heading color={'appBarText'} fontWeight={'bold'}>
-        {content}
-      </Heading>
+    <Pressable style={style}>
+      <Link to={linkTo}>
+        <Heading color={'appBarText'} fontWeight={'bold'}>
+          {content}
+        </Heading>
+      </Link>
     </Pressable>
   )
 }

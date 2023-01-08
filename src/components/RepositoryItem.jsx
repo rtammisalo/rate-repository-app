@@ -7,8 +7,8 @@ const ItemDetailsStyle = StyleSheet.create({
     flexDirection: 'row',
   },
   avatarImage: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
     borderRadius: 5,
   },
   avatarContainer: {
@@ -42,9 +42,7 @@ const RepositoryItemDetails = ({ item }) => {
         />
       </View>
       <View style={ItemDetailsStyle.detailsContainer}>
-        <Text style={ItemDetailsStyle.detailsChild} fontWeight={'bold'}>
-          {item.fullName}
-        </Text>
+        <Text fontWeight={'bold'}>{item.fullName}</Text>
         <Text
           style={ItemDetailsStyle.detailsChild}
           color={'repositoryItemTextSecondary'}
