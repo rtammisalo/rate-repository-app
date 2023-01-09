@@ -3,12 +3,12 @@ import { useMutation } from '@apollo/client'
 
 const useSignIn = () => {
   const [mutate, result] = useMutation(AUTHENTICATE, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'no-cache',
   })
 
   const signIn = async ({ username, password }) => {
-    await mutate({ variables: { username, password } })
-    return result
+    const response = await mutate({ variables: { username, password } })
+    return response
   }
 
   return [signIn, result]
