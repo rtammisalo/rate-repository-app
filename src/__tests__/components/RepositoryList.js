@@ -48,7 +48,10 @@ describe('RepositoryList', () => {
       }
 
       const { getAllByTestId } = render(
-        <RepositoryListContainer repositories={repositories} />
+        <RepositoryListContainer
+          repositories={repositories}
+          getOnPress={() => {}}
+        />
       )
 
       const repositoryItems = getAllByTestId('repositoryItem')
