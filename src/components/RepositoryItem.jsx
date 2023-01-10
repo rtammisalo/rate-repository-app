@@ -111,7 +111,7 @@ const RepositoryItemStyle = StyleSheet.create({
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={RepositoryItemStyle.container}>
+    <View style={RepositoryItemStyle.container} testID="repositoryItem">
       <RepositoryItemDetails item={item} />
       <RepositoryItemMetaData item={item} />
     </View>
