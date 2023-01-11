@@ -1,5 +1,5 @@
 import { View, StyleSheet, Image, Pressable, Linking } from 'react-native'
-import { Text } from './Text'
+import { Heading, Text } from './Text'
 import theme from '../theme'
 import Button from './Button'
 
@@ -44,7 +44,7 @@ const RepositoryItemDetails = ({ item }) => {
         />
       </View>
       <View style={ItemDetailsStyle.detailsContainer}>
-        <Text fontWeight={'bold'}>{item.fullName}</Text>
+        <Heading fontWeight={'bold'}>{item.fullName}</Heading>
         <Text style={ItemDetailsStyle.detailsChild} color={'textSecondary'}>
           {item.description}
         </Text>
@@ -93,7 +93,7 @@ const MetaDataView = ({ count, label }) => {
 
 const RepositoryItemMetaData = ({ item, style }) => {
   return (
-    <View style={{...style, ...ItemMetaDataStyle.content}}>
+    <View style={{ ...style, ...ItemMetaDataStyle.content }}>
       <MetaDataView count={item.stargazersCount} label={'Stars'} />
       <MetaDataView count={item.forksCount} label={'Forks'} />
       <MetaDataView count={item.reviewCount} label={'Reviews'} />
@@ -113,13 +113,16 @@ const RepositoryItemStyle = StyleSheet.create({
   },
 })
 
-const RepositoryItem = ({ item, showLink }) => {
+const RepositoryItem = ({ item, showLink, style }) => {
   const onPressLink = () => {
     Linking.openURL(item.url)
   }
 
   return (
-    <View style={RepositoryItemStyle.container} testID="repositoryItem">
+    <View
+      style={[style, RepositoryItemStyle.container]}
+      testID="repositoryItem"
+    >
       <RepositoryItemDetails item={item} />
       <RepositoryItemMetaData item={item} style={RepositoryItemStyle.child} />
       {showLink && (
