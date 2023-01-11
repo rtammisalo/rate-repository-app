@@ -30,6 +30,13 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal style={styles.scrollContainer}>
         <AppBarTab style={styles.child} linkTo="/" content={'Repositories'} />
+        {currentUser && (
+          <AppBarTab
+            style={styles.child}
+            linkTo="review"
+            content="Create a review"
+          />
+        )}
         <AppBarTab
           style={styles.child}
           linkTo={signIn.link}

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />
 
-export const RepositoryListContainer = ({ repositories, getOnPress}) => {
+export const RepositoryListContainer = ({ repositories, getOnPress }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : []
@@ -34,11 +34,16 @@ const RepositoryList = () => {
 
   const getOnPress = (item) => {
     return () => {
-      navigate(`repository/${item.id}`)
+      navigate(`/repository/${item.id}`)
     }
   }
 
-  return <RepositoryListContainer repositories={repositories} getOnPress={getOnPress} />
+  return (
+    <RepositoryListContainer
+      repositories={repositories}
+      getOnPress={getOnPress}
+    />
+  )
 }
 
 export default RepositoryList

@@ -14,7 +14,7 @@ const defaultStyle = StyleSheet.create({
 
 const Button = ({ content, style, onPress }) => {
   return (
-    <Pressable style={{ ...defaultStyle.button, ...style }} onPress={onPress}>
+    <Pressable style={[defaultStyle.button, style]} onPress={onPress}>
       <Text color={'textTertiary'} fontWeight={'bold'}>
         {content}
       </Text>
