@@ -42,6 +42,9 @@ const AppBar = () => {
           linkTo={signIn.link}
           content={signIn.content}
         />
+        {!currentUser && (
+          <AppBarTab style={styles.child} linkTo="signup" content="Sign up" />
+        )}
       </ScrollView>
     </View>
   )

@@ -78,9 +78,14 @@ const ReviewRepository = () => {
   const navigate = useNavigate()
 
   const onSubmit = async (values) => {
-    values.rating = Number(values.rating)
-    const repositoryId = await createReview(values)
-    navigate(`/repository/${repositoryId}`)
+    const review = { ...values, rating: Number(values.rating) }
+
+    try {
+      const repositoryId = await createReview(review)
+      navigate(`/repository/${repositoryId}`)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (

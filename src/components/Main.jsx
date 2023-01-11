@@ -5,6 +5,7 @@ import AppBar from './AppBar'
 import theme from '../theme'
 import SignIn from './SignIn'
 import SignOut from './SignOut'
+import SignUp from './SignUp'
 import Repository from './Repository'
 import ReviewRepository from './ReviewRepository'
 
@@ -26,6 +27,7 @@ const Main = () => {
         <Route path="review" element={<ReviewRepository />} exact />
         <Route path="signin" element={<SignIn />} exact />
         <Route path="signout" element={<SignOut />} exact />
+        <Route path="signup" element={<SignUp />} exact />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>
