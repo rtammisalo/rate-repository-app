@@ -26,7 +26,10 @@ export class RepositoryListContainer extends React.Component {
     const repositoryNodes = repositories
       ? repositories.edges.map((edge) => edge.node)
       : []
-    const getOnPress = this.props.getOnPress
+    const getOnPress = this.props.getOnPress ? this.props.getOnPress : () => {}
+    const onEndReached = this.props.onEndReached
+      ? this.props.onEndReached
+      : () => {}
 
     return (
       <FlatList
@@ -37,6 +40,8 @@ export class RepositoryListContainer extends React.Component {
           <RepositoryItemContainer item={item} onPress={getOnPress(item)} />
         )}
         ListHeaderComponent={this.renderHead}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
       />
     )
   }
@@ -46,7 +51,10 @@ const RepositoryList = () => {
   const [selectedOrder, setSelectedOrder] = useState(() => 'latest')
   const [keyword, setKeyword] = useState('')
   const [debouncedKeyword] = useDebounce(keyword, 500)
-  const { repositories } = useRepositories(debouncedKeyword, selectedOrder)
+  const { repositories, fetchMore } = useRepositories(
+    debouncedKeyword,
+    selectedOrder
+  )
   const navigate = useNavigate()
 
   const getOnPress = (item) => {
@@ -55,11 +63,21 @@ const RepositoryList = () => {
     }
   }
 
+  const onEndReached = () => {
+    fetchMore()
+  }
+
   return (
     <RepositoryListContainer
-      repositories={repositories}
-      getOnPress={getOnPress}
-      {...{ selectedOrder, setSelectedOrder, keyword, setKeyword }}
+      {...{
+        repositories,
+        getOnPress,
+        selectedOrder,
+        setSelectedOrder,
+        keyword,
+        setKeyword,
+        onEndReached,
+      }}
     />
   )
 }

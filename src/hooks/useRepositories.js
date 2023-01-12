@@ -20,14 +20,29 @@ const useRepositories = (searchKeyword, sortOrder) => {
       break
   }
 
-  const { data, error, loading } = useQuery(GET_REPOSITORIES, {
+  const { data, error, loading, fetchMore } = useQuery(GET_REPOSITORIES, {
     fetchPolicy: 'cache-and-network',
     variables: variables,
   })
 
+  const handleFetchMore = () => {
+    const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage
+
+    if (!canFetchMore) {
+      return
+    }
+
+    fetchMore({
+      variables: {
+        after: data.repositories.pageInfo.endCursor,
+        ...variables,
+      },
+    })
+  }
+
   const repositories = data ? data.repositories : data
 
-  return { repositories, error, loading }
+  return { repositories, fetchMore: handleFetchMore, error, loading }
 }
 
 export default useRepositories

@@ -76,7 +76,7 @@ const ReviewItem = ({ review }) => {
 
 const Repository = () => {
   const { id } = useParams()
-  const { repository, loading } = useRepository(id)
+  const { repository, loading, fetchMore } = useRepository(id)
 
   if (loading) {
     return (
@@ -94,6 +94,10 @@ const Repository = () => {
     )
   }
 
+  const onEndReached = () => {
+    fetchMore()
+  }
+
   const reviews = repository.reviews.edges.map((edge) => edge.node)
 
   return (
@@ -109,6 +113,8 @@ const Repository = () => {
           showLink
         />
       )}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
       // ...
     />
   )
