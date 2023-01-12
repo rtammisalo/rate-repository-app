@@ -21,3 +21,12 @@ export const PAGE_INFO_DETAILS = gql`
     hasNextPage
   }
 `
+
+export const REVIEW_DETAILS = gql`
+  fragment ReviewDetails on Review {
+    id
+    text
+    rating
+    createdAt
+  }
+`

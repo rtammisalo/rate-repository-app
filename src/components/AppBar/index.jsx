@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   child: {
-    marginLeft: 10,
+    marginLeft: 15,
   },
   // ...
 })
@@ -35,6 +35,13 @@ const AppBar = () => {
             style={styles.child}
             linkTo="review"
             content="Create a review"
+          />
+        )}
+        {currentUser && (
+          <AppBarTab
+            style={styles.child}
+            linkTo="userreviews"
+            content="My reviews"
           />
         )}
         <AppBarTab
