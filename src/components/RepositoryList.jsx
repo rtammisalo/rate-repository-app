@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { FlatList, View, StyleSheet } from 'react-native'
+import { useNavigate } from 'react-router-native'
+import { useDebounce } from 'use-debounce'
 import { RepositoryItemContainer } from './RepositoryItem'
 import useRepositories from '../hooks/useRepositories'
-import { useNavigate } from 'react-router-native'
 import RepositoryListHeader from './RepositoryListHeader'
 
 const styles = StyleSheet.create({
@@ -13,30 +14,39 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />
 
-export const RepositoryListContainer = ({
-  repositories,
-  getOnPress,
-  getHeader,
-}) => {
-  const repositoryNodes = repositories
-    ? repositories.edges.map((edge) => edge.node)
-    : []
+export class RepositoryListContainer extends React.Component {
+  renderHead = () => {
+    const props = this.props
 
-  return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => (
-        <RepositoryItemContainer item={item} onPress={getOnPress(item)} />
-      )}
-      ListHeaderComponent={getHeader}
-    />
-  )
+    return <RepositoryListHeader {...props} />
+  }
+
+  render() {
+    const repositories = this.props.repositories
+    const repositoryNodes = repositories
+      ? repositories.edges.map((edge) => edge.node)
+      : []
+    const getOnPress = this.props.getOnPress
+
+    return (
+      <FlatList
+        data={repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        keyExtractor={({ id }) => id}
+        renderItem={({ item }) => (
+          <RepositoryItemContainer item={item} onPress={getOnPress(item)} />
+        )}
+        ListHeaderComponent={this.renderHead}
+      />
+    )
+  }
 }
 
 const RepositoryList = () => {
   const [selectedOrder, setSelectedOrder] = useState(() => 'latest')
-  const { repositories } = useRepositories(selectedOrder)
+  const [keyword, setKeyword] = useState('')
+  const [debouncedKeyword] = useDebounce(keyword, 500)
+  const { repositories } = useRepositories(debouncedKeyword, selectedOrder)
   const navigate = useNavigate()
 
   const getOnPress = (item) => {
@@ -45,15 +55,11 @@ const RepositoryList = () => {
     }
   }
 
-  const getRepositoryListHeader = () => {
-    return <RepositoryListHeader {...{ selectedOrder, setSelectedOrder }} />
-  }
-
   return (
     <RepositoryListContainer
       repositories={repositories}
       getOnPress={getOnPress}
-      getHeader={getRepositoryListHeader}
+      {...{ selectedOrder, setSelectedOrder, keyword, setKeyword }}
     />
   )
 }

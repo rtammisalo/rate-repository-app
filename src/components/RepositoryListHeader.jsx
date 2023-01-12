@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import theme from '../theme'
+import { Searchbar } from 'react-native-paper'
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -8,6 +9,18 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 })
+
+const SearchContainer = ({ keyword, setKeyword }) => {
+  const onChangeKeyword = (newKeyword) => setKeyword(newKeyword)
+
+  return (
+    <Searchbar
+      placeholder="search for repositories"
+      onChangeText={onChangeKeyword}
+      value={keyword}
+    />
+  )
+}
 
 const ListOrderPicker = ({ selectedOrder, setSelectedOrder }) => {
   return (
@@ -26,6 +39,7 @@ const ListOrderPicker = ({ selectedOrder, setSelectedOrder }) => {
 const RepositoryListHeader = (props) => {
   return (
     <View style={styles.headerContainer}>
+      <SearchContainer {...props} />
       <ListOrderPicker {...props} />
     </View>
   )

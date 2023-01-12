@@ -1,8 +1,8 @@
 import { GET_REPOSITORIES } from '../graphql/queries'
 import { useQuery } from '@apollo/client'
 
-const useRepositories = (sortOrder) => {
-  const variables = {}
+const useRepositories = (searchKeyword, sortOrder) => {
+  const variables = { searchKeyword }
 
   switch (sortOrder) {
     case 'ascRating':
