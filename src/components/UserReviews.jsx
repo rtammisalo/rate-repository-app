@@ -2,11 +2,13 @@ import { View } from 'react-native'
 import useSignedInUser from '../hooks/useSignedInUser'
 import ReviewList from './ReviewList'
 import Text from './Text'
+import useDeleteReview from '../hooks/useDeleteReview'
 
 const UserReviews = () => {
-  const { reviewEdges, fetchMore } = useSignedInUser({
+  const { reviewEdges, fetchMore, refetch } = useSignedInUser({
     includeReviews: true,
   })
+  const [deleteReview] = useDeleteReview()
 
   if (!reviewEdges) {
     return (
@@ -20,6 +22,15 @@ const UserReviews = () => {
     fetchMore()
   }
 
+  const handleDeleteReview = (id) => {
+    try {
+      deleteReview(id)
+      refetch()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   const reviews = reviewEdges.map((edge) => edge.node)
 
   return (
@@ -27,6 +38,7 @@ const UserReviews = () => {
       {...{
         reviews,
         onEndReached,
+        handleDeleteReview,
       }}
       userReviews
     />

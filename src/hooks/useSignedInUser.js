@@ -2,7 +2,7 @@ import { GET_USER } from '../graphql/queries'
 import { useQuery } from '@apollo/client'
 
 const useSignedInUser = (variables = {}) => {
-  const { data, error, loading, fetchMore } = useQuery(GET_USER, {
+  const { data, error, loading, fetchMore, refetch } = useQuery(GET_USER, {
     fetchPolicy: 'cache-and-network',
     variables,
   })
@@ -31,6 +31,7 @@ const useSignedInUser = (variables = {}) => {
     error,
     loading,
     fetchMore: handleFetchMore,
+    refetch,
   }
 }
 

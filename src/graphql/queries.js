@@ -48,6 +48,7 @@ export const GET_USER = gql`
             ...ReviewDetails
             repository {
               fullName
+              url
             }
           }
           cursor
